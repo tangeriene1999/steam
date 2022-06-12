@@ -4,7 +4,7 @@ export class User{
     public username:string=""
     private password:string=""
 
-    public User(username:string,password:string){
+    constructor(username:string,password:string){
         this.username=username
         this.password=password
     }
@@ -13,5 +13,11 @@ export class User{
     }
     public setPassword(password:string){
         this.password=password
+    }
+    public getUsername():string{
+        return this.username;
+    }
+    public getPassword():string{
+        return this.password;
     }
 }

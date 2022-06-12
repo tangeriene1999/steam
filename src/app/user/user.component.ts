@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -13,13 +14,13 @@ export class UserComponent  {
   public password:string;
   public click:boolean;
   public result:string;
-  public user:User=new User();
-  constructor(private rest:HttpClient) {
+  public user:User=new User("","");
+  constructor(private rest:UserServiceService) {
     this.username=""
     this.password=""
     this.click=false
     this.result=""
-    this.user=new User();
+    this.user=new User("","");
    }
 
   checkout():void{
@@ -42,29 +43,14 @@ export class UserComponent  {
     return "";
   }
   newuser(){
-    /** 
-    const Http = new XMLHttpRequest();
-    const url='http://localhost:8080/steam/api/user';
-    Http.open("GET", url);
-    Http.send();
-    Http.onreadystatechange = (e) => {
-      console.log(Http.responseText)
-    }
-  }
-  */  
-  const Http = new XMLHttpRequest();
-  const url='http://localhost:8080/steam/api/user/newUser'; 
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", 'http://localhost:8080/steam/api/user/newUser', true);
-  xhr.setRequestHeader("accept", "*/*");
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.send(JSON.stringify({
-      "username": this.username,
-      "password": this.password
-  }));
-  xhr.onreadystatechange = (e) => {
-    console.log(Http.responseText)
-  }
+    this.rest.login(this.username,this.password).subscribe(
+      (erg)=>{
+        console.log(erg)
+      }
+    );
+
+    
+  
 }
 
 }
