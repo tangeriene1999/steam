@@ -26,16 +26,19 @@ export class UserComponent  {
     this.rest.login(user).subscribe(
       (erg)=>{
         alert(erg.message)
-      }
-    )
+      },
+      error=>{alert(error.message)}
+      
+    );
   }
 
   newuser():void{
     let user=new User(this.username,this.password)
     this.rest.newUser(user).subscribe(
       (erg)=>{
-        alert(erg.message)
-      }
+        alert(erg.message)       
+      },
+      error=>{alert(error.message)}
     ); 
 }
 

@@ -23,6 +23,6 @@ export class UserServiceService {
     let body=user;
     let headers={'Content-Type':'application/json'}
     return this.http.post<any>(url,body,{headers})
-
+    
   }
 }
