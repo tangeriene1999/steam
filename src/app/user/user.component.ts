@@ -12,45 +12,31 @@ export class UserComponent  {
 
   public username:string;
   public password:string;
-  public click:boolean;
-  public result:string;
-  public user:User=new User("","");
+
+
   constructor(private rest:UserServiceService) {
     this.username=""
     this.password=""
-    this.click=false
-    this.result=""
-    this.user=new User("","");
+
    }
 
-  checkout():void{
-    this.click=!this.click
-    this.user.setUsername(this.username)
-    this.user.setPassword(this.password)
-    this.newuser
-  }
-  login():boolean{
-    if((this.username=="xiang")&&(this.password==this.password)){
-      return true;
-    }else{
-      return false;
-    }
-  }
-  output():string{
-    if(this.click){
-      return "asdcsad"+this.result;
-    }
-    return "";
-  }
-  newuser(){
-    this.rest.login(this.username,this.password).subscribe(
-      (erg)=>{
-        console.log(erg)
-      }
-    );
 
-    
-  
+  login():void{
+    let user=new User(this.username,this.password)
+    this.rest.login(user).subscribe(
+      (erg)=>{
+        alert(erg.message)
+      }
+    )
+  }
+
+  newuser():void{
+    let user=new User(this.username,this.password)
+    this.rest.newUser(user).subscribe(
+      (erg)=>{
+        alert(erg.message)
+      }
+    ); 
 }
 
 }
